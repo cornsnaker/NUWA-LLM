@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
-RUN mkdir -p sessions data && chmod 777 sessions data
+RUN chmod 777 /usr/src/app
 
 RUN uv venv
 COPY requirements.txt .
