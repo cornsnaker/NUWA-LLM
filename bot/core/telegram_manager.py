@@ -20,12 +20,12 @@ class TgClient:
         LOGGER.info("Creating client from BOT_TOKEN")
         cls.ID = Config.BOT_TOKEN.split(":", 1)[0]
         cls.bot = Client(
-            cls.ID,
-            Config.TELEGRAM_API,
-            Config.TELEGRAM_HASH,
+            name=cls.ID,
+            api_id=Config.TELEGRAM_API,
+            api_hash=Config.TELEGRAM_HASH,
             proxy=Config.TG_PROXY,
             bot_token=Config.BOT_TOKEN,
-            workdir="/app",
+            in_memory=True,  # Keeps database entirely in RAM
             parse_mode=enums.ParseMode.HTML,
             max_concurrent_transmissions=10,
             max_message_cache_size=15000,
@@ -42,12 +42,12 @@ class TgClient:
             LOGGER.info("Creating client from USER_SESSION_STRING")
             try:
                 cls.user = Client(
-                    "user",
-                    Config.TELEGRAM_API,
-                    Config.TELEGRAM_HASH,
+                    name="user",
+                    api_id=Config.TELEGRAM_API,
+                    api_hash=Config.TELEGRAM_HASH,
                     proxy=Config.TG_PROXY,
                     session_string=Config.USER_SESSION_STRING,
-                    workdir="/app",
+                    in_memory=True,  # Keeps database entirely in RAM
                     parse_mode=enums.ParseMode.HTML,
                     sleep_threshold=60,
                     max_concurrent_transmissions=10,
